@@ -1,0 +1,60 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+   - name: Ensure jdk is inatalled 
+     yum: name=java-1.8.0-openjdk  state=present
+   - name: java
+     yum: name=java-1.8.0-openjdk state=latest
+   - name: create directory
+     file:
+      path: /home/test/tomcat
+      state: directory
+      mode: 0755
+   - name: download
+     get_url: url=http://www.apache.org/dist/tomcat/tomcat-7/v7.0.99/bin/apache-                                                                                                                     tomcat-7.0.99.tar.gz  dest=/home/test/tomcat
+   - name:
+     unarchive:
+        src: /home/test/tomcat/apache-tomcat-7.0.99.tar.gz
+        dest: /home/test/tomcat
+        remote_src: yes
+   - name: jjjjj
+     copy:
+        src: /home/test/war/webapp/target/webapp.war
+        dest: /home/test/tomcat/apache-tomcat-7.0.99/webapps
+   - name: start
+     command: "nohup //home/test/tomcat/apache-tomcat-7.0.99/bin/startup.sh"
+   - name : ensure catlina is running 
+     service: name=httpd enabled=yes state=started
+   - name: flush all temorary rules
+     service: name=iptables state=restarted
+   - name: Allow port for 80/https acces from anywhere
+     iptables:
+     action: insert
+     chain: INPUT
+     protocol: tcp
+     destination_port: 80
+     state: present
+     source: 0.0.0.0/0
+     jump: ACCEPT
+     
+     
+-===============================================================================================
+sonar.projectKey=Maven Project
+sonar.projectName=project analyzed with the SonarQube 
+
+SonarQube Runner
+sonar.projectVersion=1.1
+sonar.sources=src
+sonar.language=java
+sonar-runer
+sonar.sourceEncoding=UTF-8
+=================================================================================================
+
+srv:- 
+
+sq4.5.7
+sn 2.4
+jdk 1.8
+maven
+================================================================================================
