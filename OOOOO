@@ -1,0 +1,41 @@
+- name: craet directot
+     file:
+      path: /home/test/opt/mysql
+      state: directory
+      mode: 0755
+
+   - name: install mysqol server
+
+     yum: name=mysql-server state=present
+   - name: start
+     service: name=mysqld state=started
+   - name: Download sources
+     get_url:
+      url: http://repo.mysql.com/mysql-community-release-el7-7.noarch.rpm
+      dest: /home/test/opt/mysql
+
+   - name: Install package
+     yum:
+       name: /home/test/opt/mysql/mysql-community-release-el7-7.noarch.rpm
+       state: present
+
+
+   - name: Install MySQL
+     yum: name=mysql-server state=installed
+   - name:  creat db
+
+     mysql_db: name={{db_name}} state=present
+   - name: creat user name
+     mysql_user: name={{dbuser}} password={{dbpass}} prive='*.*:ALL' state=present
+
+   - name:  install python
+     yum: name=python state=present
+
+   - name: kkkk
+     yum: name=python36 state=present
+
+  
+
+=============================================
+- name: creat user name
+     mysql_user: name={{dbuser}} password={{dbpass}} prive='*.*:ALL' state=present
