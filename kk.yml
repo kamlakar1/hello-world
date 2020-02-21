@@ -1,0 +1,6 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+   - name: install ajav 
+     yum: name=java state=present
