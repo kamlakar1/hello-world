@@ -8,8 +8,8 @@
   <servlet>
   <servlet-name>HelloWorldExample</servlet-name>
   <servlet-class>com.example.HelloWorldExample</servlet-class>
-  </servlet
-  <servlet-mapping
+  </servlet>
+  <servlet-mapping>
   <servlet-name>HelloWorldExample</servlet-name>
   <url-pattern>/hello</url-pattern>
   </servlet-mapping>
